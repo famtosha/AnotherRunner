@@ -4,22 +4,32 @@ using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
 {
-    public float leftRightDelta { get; private set; }
-    public bool isJump { get; private set; }
+    public float leftRightDelta => _inputDevice.leftRightDelta;
+    public bool isJump => _inputDevice.isJump;
+
+    private IInputDevice _inputDevice;
+
+    private void Start()
+    {
+        switch (Application.platform)
+        {
+            case RuntimePlatform.WindowsEditor:
+                _inputDevice = new PCInputDevice();
+                break;
+
+            case RuntimePlatform.Android:
+                _inputDevice = new PhoneInputDevice();
+                break;
+
+            case RuntimePlatform.IPhonePlayer:
+                _inputDevice = new PhoneInputDevice();
+                break;
+
+        }
+    }
 
     private void Update()
     {
-        UpdateInput();
-    }
-
-    private void UpdateInput()
-    {
-        int centerofScreen = Screen.width / 2;
-        int mousePosition = (int)Input.mousePosition.x;
-
-        leftRightDelta = centerofScreen - mousePosition;
-        leftRightDelta *= Time.deltaTime;
-
-        isJump = Input.GetMouseButtonDown(0);
+        _inputDevice.UpdateInput();
     }
 }
