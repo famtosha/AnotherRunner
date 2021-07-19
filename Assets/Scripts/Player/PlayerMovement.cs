@@ -9,6 +9,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _forwardMovementSpeed;
 
+    private bool _isInputEnable = true;
+
     private void Awake()
     {
         _input = GetComponent<PlayerInput>();
@@ -16,6 +18,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        transform.Translate(_forwardMovementSpeed * Time.deltaTime, 0, _input.leftRightDelta * _moveSpeed);
+        if (_isInputEnable)
+        {
+            transform.Translate(_forwardMovementSpeed * Time.deltaTime, 0, _input.leftRightDelta * _moveSpeed);
+        }
+    }
+
+    public void Disable()
+    {
+        _isInputEnable = false;
     }
 }
