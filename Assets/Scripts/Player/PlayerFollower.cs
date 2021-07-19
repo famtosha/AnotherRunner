@@ -6,6 +6,6 @@ public class PlayerFollower : MonoBehaviour
 
     private void Update()
     {
-        if (_player != null) transform.position = Vector3.Lerp(_player.position, transform.position, 0.5f);
+        if (_player != null) transform.position = _player.position;
     }
 }

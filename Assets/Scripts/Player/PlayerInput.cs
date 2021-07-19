@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerInput : MonoBehaviour
 {
     public float leftRightDelta { get; private set; }
+    public bool isJump { get; private set; }
 
     private void Update()
     {
@@ -18,5 +19,7 @@ public class PlayerInput : MonoBehaviour
 
         leftRightDelta = centerofScreen - mousePosition;
         leftRightDelta *= Time.deltaTime;
+
+        isJump = Input.GetMouseButtonDown(0);
     }
 }
