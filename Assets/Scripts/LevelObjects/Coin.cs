@@ -2,8 +2,15 @@
 
 public class Coin : MonoBehaviour
 {
-    public void DestroyCoin()
+    [SerializeField] private ParticleSystem _pickupParcitle;
+
+    private void OnTriggerEnter(Collider other)
     {
-        Destroy(gameObject);
+        if (other.gameObject.TryGetComponent<Player>(out var player))
+        {
+            player.CollectCoin();
+            Instantiate(_pickupParcitle, transform.position, Quaternion.identity);
+            Destroy(gameObject);
+        }
     }
 }
