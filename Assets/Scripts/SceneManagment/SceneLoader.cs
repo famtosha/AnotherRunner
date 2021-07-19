@@ -20,7 +20,7 @@ public class SceneLoader : MonoBehaviour
     {
         if (_loadOperation != null)
         {
-            Debug.LogError($"Scene already loading");
+            Debug.LogWarning($"Scene already loading");
             return;
         }
         var state = SceneManager.LoadSceneAsync(buildIndex);

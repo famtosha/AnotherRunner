@@ -23,6 +23,7 @@ public class LevelEnd : MonoBehaviour
         if (collision.gameObject.TryGetComponent(out Player player))
         {
             _levelResultUI.ShowVirctoryWindow();
+            _particleSystem.Play();
             player.Disable();
         }
     }

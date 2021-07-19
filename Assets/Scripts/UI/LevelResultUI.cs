@@ -5,12 +5,13 @@ public class LevelResultUI : MonoBehaviour
 {
     private SceneLoader _sceneLoader;
     private Player _player;
+    private LevelProgress _levelProgress;
 
     [SerializeField] private GameObject _victoryWindow;
     [SerializeField] private GameObject _loseWindow;
 
     [Inject]
-    private void Construct(SceneLoader sceneLoader, Player player)
+    private void Construct(SceneLoader sceneLoader, Player player, LevelProgress levelProgress)
     {
         _sceneLoader = sceneLoader;
         _player = player;
@@ -19,6 +20,11 @@ public class LevelResultUI : MonoBehaviour
     private void Awake()
     {
         _player.PlayerDead += ShowLoseWindow;
+    }
+
+    private void OnDestroy()
+    {
+        _player.PlayerDead -= ShowLoseWindow;
     }
 
     public void ShowVirctoryWindow()

@@ -1,11 +1,16 @@
 ﻿using UnityEngine;
-using Zenject;
 
 public class Axe : MonoBehaviour
 {
     [SerializeField] private float _rotationAngle;
     [SerializeField] private float _moveSpeed;
+    [SerializeField] private float _offset;
     private float _rotationT;
+
+    private void Start()
+    {
+        _rotationT = _offset;
+    }
 
     private void Update()
     {
