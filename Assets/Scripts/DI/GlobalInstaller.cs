@@ -10,14 +10,7 @@ public class GlobalInstaller : MonoInstaller
 
     public override void InstallBindings()
     {
-        
-    }
-}
-
-public class SceneLoader
-{
-    public void LoadScene(int buildIndex)
-    {
-
+        var sceneLoader = Container.InstantiatePrefabForComponent<SceneLoader>(_sceneLoader, Vector3.zero, Quaternion.identity, null);
+        Container.Bind<SceneLoader>().FromInstance(sceneLoader).AsSingle();
     }
 }
